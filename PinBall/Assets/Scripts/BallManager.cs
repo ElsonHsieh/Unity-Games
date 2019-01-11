@@ -7,7 +7,7 @@ public class BallManager : MonoBehaviour {
 
     public GameObject ball;
     public Transform spawnPosition;
-    public static int lives = 1;
+    public static int lives = 3;
     public TextMesh display;
     public bool gameOver = false;
 
