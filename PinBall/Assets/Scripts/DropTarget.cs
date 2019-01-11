@@ -8,9 +8,12 @@ public class DropTarget : MonoBehaviour {
     public int bankID = 0;
     public float resetDelay = 0.5f;
     private bool isDropped = false;
+    public int scoreValue = 100;
+    public int bankValue = 3000;
     static List<DropTarget> dropTargets = new List<DropTarget>();
-	// Use this for initialization
-	void Start () {
+    private AudioSource audioSource;
+    // Use this for initialization
+    void Start () {
         dropTargets.Add(this);
 	}
 	
@@ -25,6 +28,12 @@ public class DropTarget : MonoBehaviour {
         {
             transform.position += Vector3.down * dropDistance;
             isDropped = true;
+            ScoreManager.score += scoreValue;
+            ScoreManager.newScore = scoreValue;
+            ScoreManager.scoreText = "TARGET";
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
+
 
             //Check to see if the rest of the bank has been dropped
             bool resetBank = true;
@@ -42,12 +51,15 @@ public class DropTarget : MonoBehaviour {
             //Reset all drop targets in bank if the bank has been dropped
             if (resetBank)
             {
+                ScoreManager.score += bankValue;
+                ScoreManager.newScore = bankValue;
+                ScoreManager.scoreText = "ALL\nTARGET";
                 Invoke("ResetBank", resetDelay);
             }
         }
     }
 
-    void ResetBank()
+    public void ResetBank()
     {
         foreach (DropTarget target in dropTargets)
         {

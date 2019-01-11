@@ -8,9 +8,10 @@ public class ShootBall : MonoBehaviour {
     public string buttonName = "Fire1";
 
     private List<Rigidbody> ballList = new List<Rigidbody>();
+    private AudioSource audioSource;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -23,7 +24,8 @@ public class ShootBall : MonoBehaviour {
             {
                 //ball.AddForce(Vector3.forward * force);
                 ball.AddForceAtPosition(Vector3.forward.normalized * force, transform.position);
-
+                audioSource = GetComponent<AudioSource>();
+                audioSource.Play();
             }
         }
 	}

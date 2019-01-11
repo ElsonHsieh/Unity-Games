@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
 
     public bool enterTunnel = false;
+    public string Direction = "";
 	// Use this for initialization
 	void Start () {
 		
@@ -14,7 +15,7 @@ public class Ball : MonoBehaviour {
 	void Update () {
         if (transform.position.y == 1.25f && enterTunnel == true)
         {
-            //this.GetComponent<Rigidbody>().AddForce(Vector3.forward * 1.1f);
+            //this.GetComponent<Rigidbody>().AddForce(Vector3.forward * 1.01f);
         }
         if (transform.position.y > 1.25f && enterTunnel == true)
         {
@@ -26,8 +27,23 @@ public class Ball : MonoBehaviour {
             this.transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z);
         }
 
+        if (transform.position.y > 0.5f && enterTunnel == true)
+        {
+            //this.GetComponent<Rigidbody>().AddForce(Vector3.forward * 1.5f);
+            if (Direction == "forward")
+            {
+                //this.GetComponent<Rigidbody>().AddForce(Vector3.back * 1.5f);
+                this.GetComponent<Rigidbody>().AddForce(Vector3.forward * 1.5f);
 
-        if (transform.position.y > 0.5f && enterTunnel == false)
+            }
+            else
+            {
+                this.GetComponent<Rigidbody>().AddForce(Vector3.back * 1.5f);
+
+            }
+        }
+
+            if (transform.position.y > 0.5f && enterTunnel == false)
         {
             this.transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
         }

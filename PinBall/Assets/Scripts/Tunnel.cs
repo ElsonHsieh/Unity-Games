@@ -18,7 +18,12 @@ public class Tunnel : MonoBehaviour {
 
                     if (other.GetComponent<Rigidbody>().position.z <= transform.position.z)
                     {
-                        other.GetComponent<Rigidbody>().AddForce(Vector3.forward * force);
+                        other.GetComponent<Ball>().Direction = "forward";
+                    other.GetComponent<Rigidbody>().AddForce(Vector3.forward * force);
+                    }
+                    else
+                    {
+                        other.GetComponent<Ball>().Direction = "";
                     }
                 }
                 else

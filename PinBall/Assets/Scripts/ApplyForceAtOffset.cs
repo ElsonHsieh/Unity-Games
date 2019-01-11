@@ -9,9 +9,10 @@ public class ApplyForceAtOffset : MonoBehaviour {
     public Vector3 forceDirection = Vector3.forward;
     public string buttonName = "Fire1";
     public Vector3 offset;
+    private AudioSource audioSource;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -22,10 +23,15 @@ public class ApplyForceAtOffset : MonoBehaviour {
             Input.GetKey(KeyCode.J) && flipper == "Right")
 
         {
+            //GetComponent<Rigidbody>().transform.position = new Vector3(GetComponent<Rigidbody>().transform.position.x, 0.5f, GetComponent<Rigidbody>().transform.position.z);
             GetComponent<Rigidbody>().AddForceAtPosition(forceDirection.normalized * force, transform.position + offset);
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
+
         }
         else
         {
+            //GetComponent<Rigidbody>().transform.position = new Vector3(GetComponent<Rigidbody>().transform.position.x, 0.5f, GetComponent<Rigidbody>().transform.position.z);
             GetComponent<Rigidbody>().AddForceAtPosition(forceDirection.normalized * -force, transform.position + offset);
         }
 	}
